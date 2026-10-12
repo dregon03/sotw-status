@@ -1,1 +1,44 @@
-{"ci_activated":false,"file_count_excluding_manifest":5,"files":[{"byte_count":2716,"path":".github/workflows/external-quality.yml","sha256":"e53f2c07b1a520f746b0690f77ea6300657987d8cd725a8425f7042d7a963ff3"},{"byte_count":3343,"path":"README.md","sha256":"4fa5ee360a875e15f8879dfd467e4c181230c67bbe91130800566c72b4a6ab89"},{"byte_count":6923,"path":"public-results/local-qualification.json","sha256":"280267056f2c6755c714012f9a12811f5f518da500db4664840e24ce93767dc9"},{"byte_count":16602,"path":"scripts/check-external-quality-observer.mjs","sha256":"a8275a98768de2dcfea2c05333241e1cc1b98f74c79b68c9f8ca9bdd37bbbcad"},{"byte_count":26433,"path":"scripts/observe_external_quality.mjs","sha256":"cb7186235d527fe2bba617172e36b5379869ebbec20c34e26153e89c05eefb24"}],"published":false,"schema_version":1,"scope":"Four exact NEW checker/project files plus safe public qualification; no private application/captures/secrets"}
+{
+  "schema_version": 2,
+  "published": true,
+  "routine_activation": "pending-root-review-and-prospective-policy",
+  "scope": "static-reviewed-project-files-only; excludes PACKAGE-MANIFEST.json and public-results/runs/**",
+  "file_count_excluding_manifest": 7,
+  "files": [
+    {
+      "path": ".github/workflows/external-quality.yml",
+      "byte_count": 4549,
+      "sha256": "bdd938553e484629b3b1b4ba3146ba65cde23ce3721f2341f4b3b9ae493c9488"
+    },
+    {
+      "path": "README.md",
+      "byte_count": 6792,
+      "sha256": "c6972418c18b905ca3dba791a16841f72cb7cc978daecde990ba2c5f1318d6c5"
+    },
+    {
+      "path": "public-results/local-qualification.json",
+      "byte_count": 6923,
+      "sha256": "280267056f2c6755c714012f9a12811f5f518da500db4664840e24ce93767dc9"
+    },
+    {
+      "path": "scripts/check-external-quality-observer.mjs",
+      "byte_count": 16602,
+      "sha256": "a8275a98768de2dcfea2c05333241e1cc1b98f74c79b68c9f8ca9bdd37bbbcad"
+    },
+    {
+      "path": "scripts/check-external-quality-publisher.mjs",
+      "byte_count": 16099,
+      "sha256": "7f06c95a105d1f7ffca6777accef76f7f1c2f3b2670086e88c9484800c1f850a"
+    },
+    {
+      "path": "scripts/observe_external_quality.mjs",
+      "byte_count": 26433,
+      "sha256": "cb7186235d527fe2bba617172e36b5379869ebbec20c34e26153e89c05eefb24"
+    },
+    {
+      "path": "scripts/publish_external_quality.mjs",
+      "byte_count": 22099,
+      "sha256": "3b7cb96ccaebd33ae20c0c0f5445156b449eca3e4226c1d030bc5451d2609745"
+    }
+  ]
+}
