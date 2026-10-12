@@ -1,10 +1,11 @@
 name: SOTW Public Semantic Checks
 
-# Deliberately manual-only until root qualifies a genuine public observer
-# project or verifies private free minutes and a zero-overage budget.
-# Proposed prospective cadence after approval: '17 */2 * * *' (UTC).
+# The scheduled job is disabled until root sets SOTW_EXTERNAL_ENABLED=true
+# and a prospective SOTW_EXTERNAL_POLICY_START UTC timestamp after review.
 on:
   workflow_dispatch: {}
+  schedule:
+    - cron: '17 */2 * * *'
 
 permissions:
   contents: read
@@ -15,10 +16,17 @@ concurrency:
 
 jobs:
   observe:
-    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    if: github.repository == 'dregon03/sotw-status' && github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || vars.SOTW_EXTERNAL_ENABLED == 'true')
+    permissions:
+      contents: read
     runs-on: ubuntu-24.04
     timeout-minutes: 3
+    outputs:
+      sealed: ${{ steps.evidence.outputs.sealed }}
+      report: ${{ steps.evidence.outputs.report }}
+      manifest: ${{ steps.evidence.outputs.manifest }}
     env:
+      SOTW_EXTERNAL_ENABLED: ${{ vars.SOTW_EXTERNAL_ENABLED }}
       SOTW_EXTERNAL_POLICY_START: ${{ vars.SOTW_EXTERNAL_POLICY_START }}
       SOTW_EXTERNAL_EVENT_SCHEDULE: ${{ github.event.schedule }}
     steps:
@@ -32,33 +40,66 @@ jobs:
           sparse-checkout: |
             scripts/observe_external_quality.mjs
             scripts/check-external-quality-observer.mjs
+            scripts/publish_external_quality.mjs
+            scripts/check-external-quality-publisher.mjs
             .github/workflows/external-quality.yml
+            PACKAGE-MANIFEST.json
+            public-results/local-qualification.json
       - name: Use Node without dependency installs or cache
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7, verified official tag 2026-10-12
         with:
           node-version: '22'
           package-manager-cache: false
           check-latest: false
-      - name: Validate observer fixtures without network access
-        run: node scripts/check-external-quality-observer.mjs
-      - name: Observe four bounded public semantic checks
-        run: node scripts/observe_external_quality.mjs --run --output external-quality-artifacts
-      - name: Retain original outcomes, including failures
-        if: always()
-        id: evidence
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7, verified official tag 2026-10-12
-        with:
-          name: sotw-external-quality-${{ github.run_id }}-${{ github.run_attempt }}
-          path: external-quality-artifacts/*.json
-          if-no-files-found: error
-          retention-days: 30
-          compression-level: 6
-          overwrite: false
-          include-hidden-files: false
-      - name: Record GitHub evidence coordinates
-        if: always() && steps.evidence.outcome == 'success'
-        env:
-          ARTIFACT_ID: ${{ steps.evidence.outputs.artifact-id }}
-          ARTIFACT_DIGEST: ${{ steps.evidence.outputs.artifact-digest }}
+      - name: Check the prospective policy boundary
+        id: policy
+        run: node scripts/publish_external_quality.mjs --policy
+      - name: Validate observer and publisher fixtures without network access
+        if: steps.policy.outputs.allowed == 'true'
         run: |
-          printf 'Artifact ID: %s\nArtifact SHA256: %s\n' "$ARTIFACT_ID" "$ARTIFACT_DIGEST" >> "$GITHUB_STEP_SUMMARY"
+          node scripts/check-external-quality-observer.mjs
+          node scripts/check-external-quality-publisher.mjs
+      - name: Observe four bounded public semantic checks
+        if: steps.policy.outputs.allowed == 'true'
+        run: node scripts/observe_external_quality.mjs --run --output external-quality-artifacts
+      - name: Seal bounded original outcomes, including failures
+        if: always() && steps.policy.outputs.allowed == 'true'
+        id: evidence
+        run: node scripts/publish_external_quality.mjs --prepare --input external-quality-artifacts
+
+  publish:
+    needs: observe
+    if: always() && needs.observe.outputs.sealed == 'true' && github.repository == 'dregon03/sotw-status' && github.ref == 'refs/heads/main'
+    # No write token or SOTW credential is available to the observe job.
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    env:
+      SOTW_EXTERNAL_POLICY_START: ${{ vars.SOTW_EXTERNAL_POLICY_START }}
+      SOTW_EXTERNAL_EVENT_SCHEDULE: ${{ github.event.schedule }}
+    steps:
+      - name: Checkout trusted publisher at the observation source commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7, verified official tag 2026-10-12
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts/observe_external_quality.mjs
+            scripts/publish_external_quality.mjs
+            .github/workflows/external-quality.yml
+            PACKAGE-MANIFEST.json
+      - name: Use Node without dependency installs or cache
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7, verified official tag 2026-10-12
+        with:
+          node-version: '22'
+          package-manager-cache: false
+          check-latest: false
+      - name: Publish the immutable report in one public Git commit
+        env:
+          SOTW_REPORT_BASE64: ${{ needs.observe.outputs.report }}
+          SOTW_MANIFEST_BASE64: ${{ needs.observe.outputs.manifest }}
+          SOTW_PUBLISH_TOKEN: ${{ github.token }}
+        run: node scripts/publish_external_quality.mjs --publish
