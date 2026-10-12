@@ -26,12 +26,14 @@ node scripts/check-external-quality-publisher.mjs
 
 ## Prospective routine checks
 
-Routine activation is pending review and root activation. The proposed cadence
-is `17 */2 * * *` UTC. Scheduled jobs require the repository variable
-`SOTW_EXTERNAL_ENABLED` to equal `true` and a valid, explicit prospective UTC
-`SOTW_EXTERNAL_POLICY_START`. Before that timestamp, the policy step skips
-observations and publication. A manual run is permitted before activation and
-does not fill scheduled coverage. There are no pull-request or push triggers.
+Routine checks were configured on 12 October 2026 at 14:15 UTC for the
+prospective policy beginning at 14:17 UTC. The configured cadence is
+`17 */2 * * *` UTC. At the read-only audit on 12 October 2026 at 19:16 UTC,
+GitHub exposed no scheduled runs; scheduled operation remains unverified.
+Scheduled jobs require `SOTW_EXTERNAL_ENABLED=true` and a valid prospective
+`SOTW_EXTERNAL_POLICY_START`. Before that timestamp, the policy skips
+observation and publication. Manual runs do not fill scheduled coverage.
+There are no pull-request or push triggers.
 
 GitHub can [delay or drop scheduled jobs](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule).
 It supplies no exact nominal schedule instant. Observations belong to their

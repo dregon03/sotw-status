@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "published": true,
-  "routine_activation": "pending-root-review-and-prospective-policy",
+  "routine_activation": "configured-2026-10-12T14:17:00.000Z; scheduled-operation-unverified-at-2026-10-12T19:16Z",
   "scope": "static-reviewed-project-files-only; excludes PACKAGE-MANIFEST.json and public-results/runs/**",
   "file_count_excluding_manifest": 7,
   "files": [
@@ -12,8 +12,8 @@
     },
     {
       "path": "README.md",
-      "byte_count": 6792,
-      "sha256": "c6972418c18b905ca3dba791a16841f72cb7cc978daecde990ba2c5f1318d6c5"
+      "byte_count": 6887,
+      "sha256": "b06a668b08aa54e39b3dae769f02341e329ee3a7c0576bddafb1cd8ff3eec8de"
     },
     {
       "path": "public-results/local-qualification.json",
