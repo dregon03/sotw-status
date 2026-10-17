@@ -77,7 +77,10 @@ A trusted consuming system must independently verify:
    workflow ID `382172461`, path `.github/workflows/external-quality.yml`,
    default ref `refs/heads/main`, source commit, event, run ID and attempt.
 2. The actual GitHub run attempt and trusted source-code bytes at its source
-   commit. The observation script SHA256 remains
+   commit. The current observation script SHA256 is
+   `921849eedfa40c4bdacac5c9cd798bdc0299e2b4d1f939729f722e44c5b89576`,
+   which also refuses recorded rows past their pin's cutoff or revision.
+   Reports published earlier keep their historical pin
    `cb7186235d527fe2bba617172e36b5379869ebbec20c34e26153e89c05eefb24`.
 3. The immutable publication commit/tree and the three exact safe paths added
    together, then the report and manifest byte lengths/SHA256 values and the
