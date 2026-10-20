@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "processing_version": "sotw-external-quality-v1",
+  "scope": "SOTW public GDP latest/recorded replay and core coverage semantic checks only",
+  "context": {
+    "vantage": "github-hosted",
+    "repository": "dregon03/sotw-status",
+    "run_id": "39463384129",
+    "run_attempt": "1",
+    "commit": "2131f4de202ae5300d4de303978beef45ef2e90d",
+    "ref": "refs/heads/main",
+    "event": "schedule",
+    "run_url": "https://github.com/dregon03/sotw-status/actions/runs/39463384129",
+    "runner_os": "Linux",
+    "runner_image": "ubuntu24",
+    "runner_image_version": "20261018.339.1",
+    "runner_geography": "not_established",
+    "schedule": "17 */2 * * *",
+    "activation_at": "2026-10-12T14:17:00.000Z"
+  },
+  "started_at": "2026-10-20T17:08:14.564Z",
+  "finished_at": "2026-10-20T17:08:21.328Z",
+  "observation_bucket_start": "2026-10-20T16:17:00.000Z",
+  "bucket_policy": {
+    "seconds": 7200,
+    "offset_seconds": 1020,
+    "scheduled_time": null,
+    "scheduled_time_precision": "not supplied by GitHub schedule event",
+    "scheduled_coverage_eligible": true,
+    "assignment": "actual first-attempt start bucket; never retrospectively assigned to an earlier intended slot"
+  },
+  "request_budget": 4,
+  "per_request_timeout_ms": 8000,
+  "max_response_bytes": 2097152,
+  "observations": [
+    {
+      "endpoint": "macro_latest",
+      "method": "GET",
+      "url": "https://statisticsoftheworld.com/api/v1/economic-data?series=EUROSTAT.GDP.YOY.Q&latest=1",
+      "started_at": "2026-10-20T17:08:14.565Z",
+      "finished_at": "2026-10-20T17:08:15.414Z",
+      "latency_ms": 848.587,
+      "latency_basis": "check_start_through_response_validation_including_checkpoint",
+      "http_status": 200,
+      "response_bytes": 33908,
+      "response_sha256": "fd81523acb031aa203490fa34b01dc0d02b64e6d4f6c7e4ddb067828abb337fc",
+      "success": true,
+      "outcome": "valid",
+      "error_class": null,
+      "semantic": {
+        "classification": "valid_data",
+        "observations": 39,
+        "missing_values": 0,
+        "withheld_unreliable": 0,
+        "zero_values": 0,
+        "series_id": "EUROSTAT.GDP.YOY.Q",
+        "unit": "% y/y",
+        "definition_sha256": "21036f90d940205011816538e9cfff78b21a525da8658868c03198309a41bc2a",
+        "generation": "678ddeed-b867-4924-b21d-a3ff5a1fa40d",
+        "evidence_ids": [
+          "f13c212f8f1bbaad33cc187e48ae3cbd76925e2f4873bedbb4a362c4dc1c7376"
+        ],
+        "source_observation_sha256": "6e3e3efcb767648bca1ed0d43c834710e5120b1600ff832ba5be03b68189900a",
+        "source_hash_basis": "sorted source-observation-fields-v1; clock-derived reference age excluded",
+        "source_capture_hashes": [
+          {
+            "payload_sha256": "e37cf604280aba736185b634f3b762d208e064133880ad17a30b83672e8ad5a4",
+            "capture_envelope_sha256": "e315cf5371bb33aa7904d767a2cf8d0fbf8f17e4fe4ccd91febe5a2dfd7d3dda"
+          }
+        ]
+      }
+    },
+    {
+      "endpoint": "data_status",
+      "method": "GET",
+      "url": "https://statisticsoftheworld.com/api/v1/data-status",
+      "started_at": "2026-10-20T17:08:15.423Z",
+      "finished_at": "2026-10-20T17:08:20.074Z",
+      "latency_ms": 4650.999,
+      "latency_basis": "check_start_through_response_validation_including_checkpoint",
+      "http_status": 200,
+      "response_bytes": 209062,
+      "response_sha256": "480f17ead359d0e5e1b6f7b456a57fcb0e22353a20eaecb5c4e1b71d7328b2ed",
+      "success": true,
+      "outcome": "valid",
+      "error_class": null,
+      "semantic": {
+        "classification": "valid_data",
+        "definitions": 194,
+        "observed_pairs": 6377,
+        "missing_values": 0,
+        "unreliable_pairs": 5,
+        "older_pairs": 1625,
+        "optional_operating_tracker": "measuring",
+        "optional_release_tracker": "observing",
+        "core_definition_generation_sha256": "6b6aeadd4140290bbf10a05170d6ad028656660684ac43db8b4cfcfce1be133b",
+        "publisher_release_latency_measured": false
+      }
+    },
+    {
+      "endpoint": "macro_recorded",
+      "method": "GET",
+      "url": "https://statisticsoftheworld.com/api/v1/economic-data?series=EUROSTAT.GDP.YOY.Q&latest=1&recorded=1",
+      "started_at": "2026-10-20T17:08:20.076Z",
+      "finished_at": "2026-10-20T17:08:20.926Z",
+      "latency_ms": 850.419,
+      "latency_basis": "check_start_through_response_validation_including_checkpoint",
+      "http_status": 200,
+      "response_bytes": 37416,
+      "response_sha256": "76629c1da190ca8c75bc587b8a294a877716e375ef5e931da412f5517e69a92c",
+      "success": true,
+      "outcome": "valid",
+      "error_class": null,
+      "semantic": {
+        "classification": "valid_data",
+        "observations": 39,
+        "missing_values": 0,
+        "withheld_unreliable": 0,
+        "zero_values": 0,
+        "series_id": "EUROSTAT.GDP.YOY.Q",
+        "unit": "% y/y",
+        "definition_sha256": "21036f90d940205011816538e9cfff78b21a525da8658868c03198309a41bc2a",
+        "generation": "678ddeed-b867-4924-b21d-a3ff5a1fa40d",
+        "evidence_ids": [
+          "f13c212f8f1bbaad33cc187e48ae3cbd76925e2f4873bedbb4a362c4dc1c7376"
+        ],
+        "source_observation_sha256": "6e3e3efcb767648bca1ed0d43c834710e5120b1600ff832ba5be03b68189900a",
+        "source_hash_basis": "sorted source-observation-fields-v1; clock-derived reference age excluded",
+        "source_capture_hashes": [
+          {
+            "payload_sha256": "e37cf604280aba736185b634f3b762d208e064133880ad17a30b83672e8ad5a4",
+            "capture_envelope_sha256": "e315cf5371bb33aa7904d767a2cf8d0fbf8f17e4fe4ccd91febe5a2dfd7d3dda"
+          }
+        ],
+        "recorded_pin": {
+          "coverage_start": "2026-10-11T23:07:53.241927Z",
+          "as_of": "2026-10-20T16:50:14.801604Z",
+          "revision": "160",
+          "publication_generation": "678ddeed-b867-4924-b21d-a3ff5a1fa40d",
+          "source_availability": "not_established",
+          "commit_availability": "not_established",
+          "baseline_origin": "activation_baseline"
+        }
+      }
+    },
+    {
+      "endpoint": "macro_replay",
+      "method": "GET",
+      "url": "https://statisticsoftheworld.com/api/v1/economic-data?series=EUROSTAT.GDP.YOY.Q&latest=1&recorded=1&as_of=2026-10-20T16%3A50%3A14.801604Z&revision=160",
+      "started_at": "2026-10-20T17:08:20.927Z",
+      "finished_at": "2026-10-20T17:08:21.327Z",
+      "latency_ms": 399.804,
+      "latency_basis": "check_start_through_response_validation_including_checkpoint",
+      "http_status": 200,
+      "response_bytes": 37416,
+      "response_sha256": "c9b6d204938aec9d1ec8723fc7a4ed4727572c1fc7c6d2c7bd22a88c3dba2b52",
+      "success": true,
+      "outcome": "valid",
+      "error_class": null,
+      "semantic": {
+        "classification": "valid_data",
+        "observations": 39,
+        "missing_values": 0,
+        "withheld_unreliable": 0,
+        "zero_values": 0,
+        "series_id": "EUROSTAT.GDP.YOY.Q",
+        "unit": "% y/y",
+        "definition_sha256": "21036f90d940205011816538e9cfff78b21a525da8658868c03198309a41bc2a",
+        "generation": "678ddeed-b867-4924-b21d-a3ff5a1fa40d",
+        "evidence_ids": [
+          "f13c212f8f1bbaad33cc187e48ae3cbd76925e2f4873bedbb4a362c4dc1c7376"
+        ],
+        "source_observation_sha256": "6e3e3efcb767648bca1ed0d43c834710e5120b1600ff832ba5be03b68189900a",
+        "source_hash_basis": "sorted source-observation-fields-v1; clock-derived reference age excluded",
+        "source_capture_hashes": [
+          {
+            "payload_sha256": "e37cf604280aba736185b634f3b762d208e064133880ad17a30b83672e8ad5a4",
+            "capture_envelope_sha256": "e315cf5371bb33aa7904d767a2cf8d0fbf8f17e4fe4ccd91febe5a2dfd7d3dda"
+          }
+        ],
+        "recorded_pin": {
+          "coverage_start": "2026-10-11T23:07:53.241927Z",
+          "as_of": "2026-10-20T16:50:14.801604Z",
+          "revision": "160",
+          "publication_generation": "678ddeed-b867-4924-b21d-a3ff5a1fa40d",
+          "source_availability": "not_established",
+          "commit_availability": "not_established",
+          "baseline_origin": "activation_baseline"
+        }
+      }
+    }
+  ],
+  "counts": {
+    "planned": 4,
+    "attempted": 4,
+    "completed": 4,
+    "successful": 4,
+    "failed": 0,
+    "observer_clock_failures": 0,
+    "unobserved": 0,
+    "valid_missing_or_empty": 0
+  },
+  "state": "complete_valid",
+  "notice": "One external vantage; valid missing values are not request failures. Absent or incomplete attempts remain unobserved. These sampled semantic checks do not establish platform uptime, publisher availability or a service guarantee.",
+  "attempt_id": "3f0b39b96e60e2f10bbf4a9f620c3fe50202a7a6498ab0be94a46d3965a672bb",
+  "observer_script_sha256": "cb7186235d527fe2bba617172e36b5379869ebbec20c34e26153e89c05eefb24"
+}
