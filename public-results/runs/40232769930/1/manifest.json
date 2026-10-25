@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "processing_version": "sotw-external-quality-v1",
+  "files": [
+    {
+      "path": "observation.json",
+      "sha256": "6fb524ca0f4f8ed186791f92456b27c740f82b0807545814bd6010f8a584eee9",
+      "byte_count": 8804
+    }
+  ],
+  "attempt_id": "0b2f310af318b7338af37c65619bf4f264e9921f094177727e45012ca4e10876",
+  "github_run_url": "https://github.com/dregon03/sotw-status/actions/runs/40232769930",
+  "observer_script_sha256": "cb7186235d527fe2bba617172e36b5379869ebbec20c34e26153e89c05eefb24"
+}
