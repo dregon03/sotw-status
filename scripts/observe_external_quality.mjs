@@ -59,6 +59,9 @@ export function validateMacro(v,recorded=false){
   demand(obj(state)&&state.schemaVersion===1&&state.processingVersion==='macro-journal-v1'&&validStamp(state.coverageStart)&&validStamp(state.asOf)&&stampMicros(state.asOf)>=stampMicros(state.coverageStart)&&revision(state.revision)&&state.readSemantics==='transaction_final_recording_time'&&state.readSnapshot==='statement_start_committed_frames'&&state.sourceAvailability==='not_established'&&state.commitAvailability==='not_established'&&state.publicationGeneration===s.generation,'macro_recording_pin');
   demand(obj(state.baselinePerSeries)&&['activation_baseline','first_qualified_publication'].includes(state.baselinePerSeries.origin)&&obj(state.currentRights)&&state.currentRights.redistributionPermitted===true&&typeof state.currentRights.resalePermitted==='boolean'&&(!s.resale_permitted||state.currentRights.resalePermitted),'macro_recording_rights');
   demand(v.data.every(r=>validStamp(r.recordedAt)&&revision(r.revision)),'macro_recording_rows');
+  // A row recorded after the pin it is served under is not part of that recorded state,
+  // even when a replay repeats it. Exact microseconds and i64 revisions; equality is inside.
+  demand(v.data.every(r=>stampMicros(r.recordedAt)<=stampMicros(state.asOf)&&BigInt(r.revision)<=BigInt(state.revision)),'macro_recording_after_pin');
  }else demand(state===undefined,'unexpected_recording_pin');
  const sourceRows=v.data.map(r=>Object.fromEntries(['geo','period','period_start','value','raw_value','quality','complete_status','source_attributes'].map(k=>[k,r[k]]))).sort((a,b)=>a.geo.localeCompare(b.geo)||a.period.localeCompare(b.period));
  const sourceHash=sha256(canonical(sourceRows));
