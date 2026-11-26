@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "storage": "public-git-commit-v1",
+  "repository": "dregon03/sotw-status",
+  "repository_id": 1415634723,
+  "workflow_id": 382172461,
+  "workflow_path": ".github/workflows/external-quality.yml",
+  "source_commit": "57b37a95580aaa630617940ed28c85e8f850dd41",
+  "source_ref": "refs/heads/main",
+  "run_id": "45805690478",
+  "run_attempt": "1",
+  "event": "schedule",
+  "run_url": "https://github.com/dregon03/sotw-status/actions/runs/45805690478",
+  "attempt_id": "43b1d159f00f12f5f7a2472be1609e0575b53594ba17a3f96c6386163b5cded6",
+  "published_at": "2026-11-26T10:55:24.796Z",
+  "code_sha256": {
+    "observer": "cb7186235d527fe2bba617172e36b5379869ebbec20c34e26153e89c05eefb24",
+    "publisher": "3b7cb96ccaebd33ae20c0c0f5445156b449eca3e4226c1d030bc5451d2609745",
+    "workflow": "bdd938553e484629b3b1b4ba3146ba65cde23ce3721f2341f4b3b9ae493c9488",
+    "package_manifest": "c7b8cd8cc66cf26d4336110d741fbe07b67e24b0c0bf72df942109e69424e4fd"
+  },
+  "files": [
+    {
+      "path": "observation.json",
+      "sha256": "8af2093f4d40b88c2612d58ea75df32f9185e03d346bef6dc1f2276b8984350a",
+      "byte_count": 8809
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "1937a5b93214d573ab975be479633ce786c739ae3d56294ee2de1e9932cecb2a",
+      "byte_count": 519
+    }
+  ],
+  "trust_notice": "Verify GitHub source run/attempt, source code pins and the atomic publication commit independently. These hashes are integrity evidence, not a substitute for provenance. No artifact archive is created."
+}
